@@ -14,5 +14,11 @@ namespace CompareFS
         }
 
         public FileInfo FileInfo { get; private set; }
+
+        public FileModification(FileInfo fileInfo, ModificationType modificationType)
+            : base(modificationType)
+        {
+            FileInfo = fileInfo;
+        }
     }
 }

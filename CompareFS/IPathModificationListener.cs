@@ -5,11 +5,8 @@ using System.Text;
 
 namespace CompareFS
 {
-    public enum ModificationType
+    public interface IPathModificationListener
     {
-        None,
-        Added,
-        Removed,
-        Changed
+        void OnModification(PathModification modification);
     }
 }

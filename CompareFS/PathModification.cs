@@ -5,8 +5,15 @@ using System.Text;
 
 namespace CompareFS
 {
-    abstract class PathModification
+    public abstract class PathModification
     {
         public abstract string Path { get; }
+
+        public ModificationType Modification { get; private set; }
+
+        public PathModification(ModificationType modificationType)
+        {
+            Modification = modificationType;
+        }
     }
 }
