@@ -10,9 +10,13 @@ namespace CompareFS
     {
         private IPathModificationListener Listener;
 
+        public List<string> ExcludedFileExtensions { get; private set; }
+
         public PathComparator(IPathModificationListener listener)
         {
             Listener = listener;
+
+            ExcludedFileExtensions = new List<string>();
         }
 
         public void Compare(DirectoryInfo referenceDirectory, DirectoryInfo targetDirectory)
@@ -40,14 +44,19 @@ namespace CompareFS
 
         private void CompareFiles(DirectoryInfo referenceDirectory, DirectoryInfo targetDirectory)
         {
-            foreach (FileInfo fi in targetDirectory.EnumerateFiles().Where(f => !referenceDirectory.HasFile(f)))
+            foreach (FileInfo fi in EnumerateLeftFilesMissingRight(targetDirectory, referenceDirectory))
             {
                 Listener.OnModification(new FileModification(fi, ModificationType.Added));
             }
-            foreach (FileInfo fi in referenceDirectory.EnumerateFiles().Where(f => !targetDirectory.HasFile(f)))
+            foreach (FileInfo fi in EnumerateLeftFilesMissingRight(referenceDirectory, targetDirectory))
             {
                 Listener.OnModification(new FileModification(fi, ModificationType.Removed));
             }
+        }
+
+        private IEnumerable<FileInfo> EnumerateLeftFilesMissingRight(DirectoryInfo leftFiles, DirectoryInfo rightFiles)
+        {
+            return leftFiles.EnumerateFiles().Where(f => !ExcludedFileExtensions.Contains(f.Extension)).Where(f => !rightFiles.HasFile(f));
         }
     }
 }
