@@ -28,9 +28,11 @@ namespace DriveKeepAlive
         public MainWindow()
         {
             InitializeComponent();
+
             var path = Path.Combine(Config.FileDirectory, Config.FileName);
             PathLabel.Text = path;
             FileStream = File.OpenWrite(path);
+
             var t = new Thread(KeepAliveCycle);
             t.IsBackground = true;
             t.Start();
@@ -57,8 +59,7 @@ namespace DriveKeepAlive
 
         private bool IsUserActive()
         {
-            LastInputInfo info = new LastInputInfo();
-            info.cbSize = LastInputInfo.SizeOf;
+            LastInputInfo info = LastInputInfo.Create();
             if (!Win32Bindings.GetLastInputInfo(ref info))
             {
                 throw new Exception("Could not get time of last user activity");

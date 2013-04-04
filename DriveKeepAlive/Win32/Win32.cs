@@ -21,5 +21,12 @@ namespace DriveKeepAlive.Win32
         public UInt32 cbSize;
         [MarshalAs(UnmanagedType.U4)]
         public UInt32 dwTime;
+
+        public static LastInputInfo Create()
+        {
+            LastInputInfo info = new LastInputInfo();
+            info.cbSize = LastInputInfo.SizeOf;
+            return info;
+        }
     }
 }
