@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparePathCLI", "ComparePa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveKeepAlive", "DriveKeepAlive\DriveKeepAlive.csproj", "{82AD4031-F25A-4317-990B-80E8BFA0B5A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBloater", "FileBloater\FileBloater.csproj", "{72C18893-8ED3-4776-980E-4A4802EE76C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Release|x86.ActiveCfg = Release|Any CPU
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Debug|x86.ActiveCfg = Debug|x86
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Debug|x86.Build.0 = Debug|x86
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Release|Any CPU.ActiveCfg = Release|x86
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Release|Mixed Platforms.Build.0 = Release|x86
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Release|x86.ActiveCfg = Release|x86
+		{72C18893-8ED3-4776-980E-4A4802EE76C7}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
