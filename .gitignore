@@ -1,6 +1,5 @@
 
 *.suo
-CompareFS/bin
-CompareFS/obj
-ComparePathCLI/bin
-ComparePathCLI/obj
+*.user
+bin
+obj
