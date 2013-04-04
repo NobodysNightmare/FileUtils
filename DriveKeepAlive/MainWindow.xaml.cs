@@ -28,7 +28,9 @@ namespace DriveKeepAlive
         public MainWindow()
         {
             InitializeComponent();
-            FileStream = File.OpenWrite(Path.Combine(Config.FileDirectory, Config.FileName));
+            var path = Path.Combine(Config.FileDirectory, Config.FileName);
+            PathLabel.Text = path;
+            FileStream = File.OpenWrite(path);
             var t = new Thread(KeepAliveCycle);
             t.IsBackground = true;
             t.Start();
