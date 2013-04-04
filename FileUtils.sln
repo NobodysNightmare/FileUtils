@@ -1,9 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompareFS", "CompareFS\CompareFS.csproj", "{8CEDDAC5-C9DB-4129-BE95-BFBFF7F0CCB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparePathCLI", "ComparePathCLI\ComparePathCLI.csproj", "{2E5FCCF9-27D5-4427-A257-A9159CFC6E73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveKeepAlive", "DriveKeepAlive\DriveKeepAlive.csproj", "{82AD4031-F25A-4317-990B-80E8BFA0B5A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,16 @@ Global
 		{2E5FCCF9-27D5-4427-A257-A9159CFC6E73}.Release|Mixed Platforms.Build.0 = Release|x86
 		{2E5FCCF9-27D5-4427-A257-A9159CFC6E73}.Release|x86.ActiveCfg = Release|x86
 		{2E5FCCF9-27D5-4427-A257-A9159CFC6E73}.Release|x86.Build.0 = Release|x86
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{82AD4031-F25A-4317-990B-80E8BFA0B5A2}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
