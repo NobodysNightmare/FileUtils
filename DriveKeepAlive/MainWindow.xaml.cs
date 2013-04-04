@@ -29,21 +29,28 @@ namespace DriveKeepAlive
         {
             InitializeComponent();
             FileStream = File.OpenWrite(Path.Combine(Config.FileDirectory, Config.FileName));
-            var t = new Thread(() =>
-            {
-                long writeCount = 0;
-                while (true)
-                {
-                    if (IsUserActive())
-                    {
-                        WriteToBusyFile();
-                        UpdateStatusText(++writeCount);
-                    }
-                    Thread.Sleep(Config.WriteInterval);
-                }
-            });
+            var t = new Thread(KeepAliveCycle);
             t.IsBackground = true;
             t.Start();
+        }
+
+        private void KeepAliveCycle()
+        {
+            long writeCount = 0;
+            long idleCount = 0;
+            while (true)
+            {
+                if (IsUserActive())
+                {
+                    WriteToKeepAliveFile();
+                    UpdateStatusText(++writeCount, idleCount);
+                }
+                else
+                {
+                    UpdateStatusText(writeCount, ++idleCount);
+                }
+                Thread.Sleep(Config.WriteInterval);
+            }
         }
 
         private bool IsUserActive()
@@ -59,7 +66,7 @@ namespace DriveKeepAlive
             return idleTime <= Config.TimeToIdle;
         }
 
-        private void WriteToBusyFile()
+        private void WriteToKeepAliveFile()
         {
             if (FileStream.Length >= Config.MaximumFileSize)
             {
@@ -69,11 +76,16 @@ namespace DriveKeepAlive
             FileStream.Flush();
         }
 
-        private void UpdateStatusText(long writeCount)
+        private void UpdateStatusText(long writeCount, long idleCount)
         {
-            StatusText.Dispatcher.Invoke(new Action(() =>
+            WriteCountLabel.Dispatcher.Invoke(new Action(() =>
             {
-                StatusText.Text = string.Format("{0} times written", writeCount);
+                WriteCountLabel.Text = string.Format("write cycles: {0}", writeCount);
+            }));
+
+            IdleCountLabel.Dispatcher.Invoke(new Action(() =>
+            {
+                IdleCountLabel.Text = string.Format("idle cycles: {0}", idleCount);
             }));
         }
 

@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Drive Keep-alive" Height="115.672" Width="525" Closed="Window_Closed_1" ResizeMode="CanMinimize">
     <Grid>
-        <TextBlock x:Name="StatusText" Margin="10" TextWrapping="Wrap" Text="Text" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="WriteCountLabel" TextWrapping="Wrap" Text="Text" Margin="10,10,383,53"/>
+        <TextBlock x:Name="IdleCountLabel" TextWrapping="Wrap" Text="Text" Width="120" Margin="10,43,389,10"/>
 
     </Grid>
 </Window>
