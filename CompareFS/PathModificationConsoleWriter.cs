@@ -22,6 +22,9 @@ namespace CompareFS
                 case ModificationType.Removed:
                     Console.Write("REMOVED: ");
                     break;
+                case ModificationType.Changed:
+                    Console.Write("CHANGED: ");
+                    break;
                 default:
                     break;
             }

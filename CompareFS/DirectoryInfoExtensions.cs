@@ -10,12 +10,17 @@ namespace CompareFS
     {
         public static bool HasFile(this DirectoryInfo self, FileInfo file)
         {
-            return self.EnumerateFiles(file.Name).Count() > 0;
+            return self.EnumerateFiles(file.Name).Any();
+        }
+
+        public static FileInfo GetCorrespondingFile(this DirectoryInfo self, FileInfo file)
+        {
+            return self.EnumerateFiles(file.Name).Single();
         }
 
         public static bool HasSubdirectory(this DirectoryInfo self, DirectoryInfo subDirectory)
         {
-            return self.EnumerateDirectories(subDirectory.Name).Count() > 0;
+            return self.EnumerateDirectories(subDirectory.Name).Any();
         }
     }
 }
