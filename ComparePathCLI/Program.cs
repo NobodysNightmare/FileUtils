@@ -13,7 +13,7 @@ namespace ComparePathCLI
         {
             if (args.Length < 2 || args.Length % 2 != 0)
             {
-                Console.WriteLine("Usage: ComparePathCLI (-i extension)* path1 path2");
+                Console.WriteLine("Usage: ComparePathCLI (-i extension)* [-m true|false] path1 path2");
                 return;
             }
 
@@ -25,10 +25,19 @@ namespace ComparePathCLI
                 {
                     comparator.ExcludedFileExtensions.Add(args[i+1]);
                 }
+                else if (args[i] == "-m")
+                {
+                    comparator.CheckForModifications = args[i + 1] == "true";
+                }
                 else
                 {
                     Console.WriteLine("Skipping unknown option \"{0}\"", args[i]);
                 }
+            }
+
+            if (comparator.CheckForModifications)
+            {
+                Console.WriteLine("also checking for file-modifications");
             }
 
             comparator.Compare(new DirectoryInfo(args[args.Length - 2]), new DirectoryInfo(args[args.Length - 1]));
