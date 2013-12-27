@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace CompareFS
 {
@@ -60,7 +61,7 @@ namespace CompareFS
             {
                 foreach (Pair<FileInfo> pair in EnumerateCommonFilesLeftAndRight(targetDirectory, referenceDirectory))
                 {
-                    if (!CompareFiles(pair.Left, pair.Right))
+                    if (!CompareFilesAsync(pair.Left, pair.Right).Result)
                     {
                         Listener.OnModification(new FileModification(pair.Left, ModificationType.Changed));
                     }
@@ -78,16 +79,24 @@ namespace CompareFS
             return leftFiles.EnumerateFiles().Where(f => !ExcludedFileExtensions.Contains(f.Extension)).Where(f => rightFiles.HasFile(f)).Select(left => new Pair<FileInfo>(left, rightFiles.GetCorrespondingFile(left)));
         }
 
-        private bool CompareFiles(FileInfo fileInfo1, FileInfo fileInfo2)
+        private async Task<bool> CompareFilesAsync(FileInfo fileInfo1, FileInfo fileInfo2)
         {
-            SHA1 hashAlgorithm = SHA1.Create();
+            
             using (var stream1 = fileInfo1.OpenRead())
             using (var stream2 = fileInfo2.OpenRead())
             {
-                byte[] hash1 = hashAlgorithm.ComputeHash(stream1);
-                byte[] hash2 = hashAlgorithm.ComputeHash(stream2);
+                Task<byte[]> hash1 = ComputeHashAsync(stream1);
+                Task<byte[]> hash2 = ComputeHashAsync(stream2);
 
-                return ByteArrayCompare(hash1, hash2);
+                return ByteArrayCompare(await hash1, await hash2);
+            }
+        }
+
+        private async Task<byte[]> ComputeHashAsync(Stream source)
+        {
+            using (SHA1 hashAlgorithm = SHA1.Create())
+            {
+                return await Task.Factory.StartNew<byte[]>(() => hashAlgorithm.ComputeHash(source));
             }
         }
 
