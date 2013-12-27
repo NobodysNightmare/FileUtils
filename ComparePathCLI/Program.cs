@@ -17,7 +17,8 @@ namespace ComparePathCLI
                 return;
             }
 
-            var comparator = new PathComparator(new PathModificationConsoleWriter());
+            var comparator = new PathComparator();
+            var writer = new PathModificationConsoleWriter(comparator);
 
             for (int i = 0; i < args.Length - 2; i += 2)
             {

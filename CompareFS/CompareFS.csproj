@@ -44,13 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DirectoryInfoExtensions.cs" />
-    <Compile Include="DirectoryModification.cs" />
-    <Compile Include="FileModification.cs" />
-    <Compile Include="ModificationType.cs" />
+    <Compile Include="ModificationEventArgs.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="PathComparator.cs" />
-    <Compile Include="PathModification.cs" />
-    <Compile Include="IPathModificationListener.cs" />
     <Compile Include="PathModificationConsoleWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

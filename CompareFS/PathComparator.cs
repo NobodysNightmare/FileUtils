@@ -10,17 +10,26 @@ namespace CompareFS
 {
     public class PathComparator
     {
-        private IPathModificationListener Listener;
+        public delegate void ModificationEventHandler(object sender, ModificationEventArgs args);
+
+        public event ModificationEventHandler Modification;
 
         public List<string> ExcludedFileExtensions { get; private set; }
 
         public bool CheckForModifications { get; set; }
 
-        public PathComparator(IPathModificationListener listener)
+        public PathComparator()
         {
-            Listener = listener;
-
             ExcludedFileExtensions = new List<string>();
+        }
+
+        protected void OnModification(ModificationEventArgs args)
+        {
+            var handler = Modification;
+            if (handler != null)
+            {
+                handler(this, args);
+            }
         }
 
         public void Compare(DirectoryInfo referenceDirectory, DirectoryInfo targetDirectory)
@@ -38,11 +47,11 @@ namespace CompareFS
         {
             foreach (DirectoryInfo di in targetDirectory.EnumerateDirectories().Where(d => !referenceDirectory.HasSubdirectory(d)))
             {
-                Listener.OnModification(new DirectoryModification(di, ModificationType.Added));
+                OnModification(new ModificationEventArgs(di.FullName, ModificationType.Added));
             }
             foreach (DirectoryInfo di in referenceDirectory.EnumerateDirectories().Where(d => !targetDirectory.HasSubdirectory(d)))
             {
-                Listener.OnModification(new DirectoryModification(di, ModificationType.Removed));
+                OnModification(new ModificationEventArgs(di.FullName, ModificationType.Removed));
             }
         }
 
@@ -50,11 +59,11 @@ namespace CompareFS
         {
             foreach (FileInfo fi in EnumerateLeftFilesMissingRight(targetDirectory, referenceDirectory))
             {
-                Listener.OnModification(new FileModification(fi, ModificationType.Added));
+                OnModification(new ModificationEventArgs(fi.FullName, ModificationType.Added));
             }
             foreach (FileInfo fi in EnumerateLeftFilesMissingRight(referenceDirectory, targetDirectory))
             {
-                Listener.OnModification(new FileModification(fi, ModificationType.Removed));
+                OnModification(new ModificationEventArgs(fi.FullName, ModificationType.Removed));
             }
 
             if (CheckForModifications)
@@ -63,7 +72,7 @@ namespace CompareFS
                 {
                     if (!CompareFilesAsync(pair.Left, pair.Right).Result)
                     {
-                        Listener.OnModification(new FileModification(pair.Left, ModificationType.Changed));
+                        OnModification(new ModificationEventArgs(pair.Left.FullName, ModificationType.Changed));
                     }
                 }
             }

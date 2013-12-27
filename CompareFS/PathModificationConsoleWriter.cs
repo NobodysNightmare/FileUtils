@@ -5,30 +5,45 @@ using System.Text;
 
 namespace CompareFS
 {
-    public class PathModificationConsoleWriter : IPathModificationListener
+    public class PathModificationConsoleWriter
     {
-        public void OnModification(PathModification modification)
+        public PathModificationConsoleWriter(PathComparator comparator)
         {
-            if (modification == null)
+            comparator.Modification += HandleModification;
+        }
+
+        private void HandleModification(object sender, ModificationEventArgs args)
+        {
+            if (args == null)
             {
-                throw new ArgumentNullException("modification");
+                throw new ArgumentNullException("args");
             }
 
-            switch (modification.Modification)
+            switch (args.Type)
             {
                 case ModificationType.Added:
-                    Console.Write("ADDED: ");
+                    WriteColored(ConsoleColor.Green, "ADDED:   ");
                     break;
                 case ModificationType.Removed:
-                    Console.Write("REMOVED: ");
+                    WriteColored(ConsoleColor.Red,   "REMOVED: ");
                     break;
                 case ModificationType.Changed:
-                    Console.Write("CHANGED: ");
+                    WriteColored(ConsoleColor.Yellow, "CHANGED: ");
                     break;
                 default:
                     break;
             }
-            Console.WriteLine(modification.Path);
+            Console.WriteLine(args.Path);
+        }
+
+        private static void WriteColored(ConsoleColor color, string value, params object[] args)
+        {
+            var oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+
+            Console.Write(value, args);
+
+            Console.ForegroundColor = oldColor;
         }
     }
 }
