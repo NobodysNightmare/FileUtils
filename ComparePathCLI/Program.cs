@@ -41,7 +41,31 @@ namespace ComparePathCLI
                 Console.WriteLine("also checking for file-modifications");
             }
 
-            comparator.Compare(new DirectoryInfo(args[args.Length - 2]), new DirectoryInfo(args[args.Length - 1]));
+            DirectoryInfo firstDirectory; 
+            DirectoryInfo secondDirectory;
+            try 
+	        {	        
+		        firstDirectory = GetDirectoryInfo(args[args.Length - 2]);
+                secondDirectory =  GetDirectoryInfo(args[args.Length - 1]);
+	        }
+	        catch (Exception e)
+	        {
+                Console.WriteLine("Can't compare directories: {0}", e.Message);
+                return;
+	        }
+
+            comparator.Compare(firstDirectory, secondDirectory);
+        }
+
+        private static DirectoryInfo GetDirectoryInfo(string path)
+        {
+            DirectoryInfo result = new DirectoryInfo(path);
+            if (!result.Exists)
+            {
+                throw new ArgumentException(string.Format("The directory '{0}' does not exist", path));
+            }
+
+            return result;
         }
     }
 }
