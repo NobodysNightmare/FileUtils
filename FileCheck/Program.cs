@@ -100,7 +100,8 @@ namespace FileCheck
             {
                 Console.Write("...  {0}", file.FullName);
                 GenerateChecksum(file);
-                Console.WriteLine("\rOK ");
+                WriteColored(ConsoleColor.Green, "\rOK ");
+                Console.WriteLine();
             }
         }
 
@@ -128,17 +129,20 @@ namespace FileCheck
                 FileInfo checkedFile = new FileInfo(checkedFileName);
                 if (!checkedFile.Exists)
                 {
-                    Console.WriteLine("\rMISS");
+                    WriteColored(ConsoleColor.Yellow, "\rMISS");
+                    Console.WriteLine();
                 }
                 else
                 {
                     if (VerifyFileHash(checkedFile, hashFile))
                     {
-                        Console.WriteLine("\rOK ");
+                        WriteColored(ConsoleColor.Green, "\rOK ");
+                        Console.WriteLine();
                     }
                     else
                     {
-                        Console.WriteLine("\rFAIL");
+                        WriteColored(ConsoleColor.Red, "\rFAIL");
+                        Console.WriteLine();
                     }
                 }
             }
@@ -175,6 +179,16 @@ namespace FileCheck
                     return false;
 
             return true;
+        }
+
+        private static void WriteColored(ConsoleColor color, string value, params object[] args)
+        {
+            var oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+
+            Console.Write(value, args);
+
+            Console.ForegroundColor = oldColor;
         }
     }
 }
