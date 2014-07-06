@@ -1,15 +1,16 @@
 ﻿<Window x:Class="DriveKeepAlive.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Drive Keep-alive" Height="115.672" Width="525" Closed="Window_Closed_1" ResizeMode="CanMinimize">
+        Title="Drive Keep-alive" Height="152.672" Width="525" Closed="Window_Closed_1" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="41*"/>
+            <RowDefinition Height="46*"/>
             <RowDefinition Height="46*"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="WriteCountLabel" Grid.Row="0" Margin="10,10,332,10" ><Run Text="write cycles"/></TextBlock>
         <TextBlock x:Name="IdleCountLabel" Text="idle cycles" Grid.Row="1" Margin="10" />
         <TextBlock x:Name="PathLabel" Text="Directory" HorizontalAlignment="Right" Margin="0,10,9,10" />
-
+        <CheckBox x:Name="forceRefreshCheckBox" Grid.Row="2" Content="Force Refreshing" Checked="forceRefreshCheckBox_Checked"/>
     </Grid>
 </Window>

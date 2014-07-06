@@ -22,6 +22,7 @@ namespace DriveKeepAlive
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool ForceRefresh;
         private Stream FileStream;
         private AppSettings Config = AppSettings.Default;
 
@@ -44,7 +45,7 @@ namespace DriveKeepAlive
             long idleCount = 0;
             while (true)
             {
-                if (IsUserActive())
+                if (IsUserActive() || ForceRefresh)
                 {
                     WriteToKeepAliveFile();
                     UpdateStatusText(++writeCount, idleCount);
@@ -95,6 +96,11 @@ namespace DriveKeepAlive
         private void Window_Closed_1(object sender, EventArgs e)
         {
             FileStream.Close();
+        }
+
+        private void forceRefreshCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            ForceRefresh = forceRefreshCheckBox.IsChecked.Value;
         }
     }
 }
