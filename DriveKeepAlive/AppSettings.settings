@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KeepDriveBusy" GeneratedClassName="AppSettings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DriveKeepAlive" GeneratedClassName="AppSettings">
   <Profiles />
   <Settings>
     <Setting Name="FileDirectory" Type="System.String" Scope="User">
@@ -9,7 +9,7 @@
       <Value Profile="(Default)">keep-busy.txt</Value>
     </Setting>
     <Setting Name="WriteInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5000</Value>
+      <Value Profile="(Default)">4000</Value>
     </Setting>
     <Setting Name="TimeToIdle" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">30000</Value>
