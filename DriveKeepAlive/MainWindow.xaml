@@ -11,6 +11,6 @@
         <TextBlock x:Name="WriteCountLabel" Grid.Row="0" Margin="10,10,332,10" ><Run Text="write cycles"/></TextBlock>
         <TextBlock x:Name="IdleCountLabel" Text="idle cycles" Grid.Row="1" Margin="10" />
         <TextBlock x:Name="PathLabel" Text="Directory" HorizontalAlignment="Right" Margin="0,10,9,10" />
-        <CheckBox x:Name="forceRefreshCheckBox" Grid.Row="2" Content="Force Refreshing" Checked="forceRefreshCheckBox_Checked"/>
+        <CheckBox x:Name="forceRefreshCheckBox" Grid.Row="2" Content="Force Refreshing" Margin="10,10,332,10" Checked="forceRefreshCheckBox_Checked"/>
     </Grid>
 </Window>
